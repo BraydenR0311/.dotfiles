@@ -1,0 +1,23 @@
+# Increase volume.
+"pactl set-sink-volume @DEFAULT_SINK@ +5%"
+   XF86AudioRaiseVolume
+
+# Decrease volume.
+"pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    XF86AudioLowerVolume
+
+# Increase brightness.
+"brightnessctl s +5%"
+    XF86MonBrightnessUp
+
+# Decrease brightness.
+"brightnessctl s 5%-"
+    XF86MonBrightnessDown
+
+# Take screenshot selection.
+"maim -s | xclip -selection clipboard -t image/png"
+    mod1 + shift + s
+
+# Spawn firefox.
+"firefox"
+    mod1 + o
