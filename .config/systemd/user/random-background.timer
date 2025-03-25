@@ -1,0 +1,10 @@
+[Unit]
+Description=Create random background periodically.
+
+[Timer]
+OnBootSec=30min
+OnUnitActiveSec=30min
+Unit=random-background.service
+
+[Install]
+WantedBy=default.target

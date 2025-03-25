@@ -1,0 +1,8 @@
+[Unit]
+Description=Random background pictures after set interval
+
+[Service]
+ExecStart=/usr/bin/bash /home/brayden/Documents/scripts/random-background.sh
+
+[Install]
+WantedBy=default.target
