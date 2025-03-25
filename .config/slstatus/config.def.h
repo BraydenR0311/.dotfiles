@@ -68,6 +68,8 @@ static const struct arg args[] = {
 	{ datetime, "%s",           " %a, %m-%d-%Y |  %I:%M:%S %p " },
 	{ ram_perc, "; %s%% | ",            },
 	{ cpu_perc, " %s%% | ",            },
-	{ vol_perc, "  %s%% | ", "Master"},
+	// { vol_perc, "  %s%% | ", "Master"},
+	{ run_command, "  %s | ", "pactl get-sink-volume @DEFAULT_SINK@ |"
+				     "grep -oP '\\d+%'"},
 	{ battery_perc, " %s%% ",	    "BAT0" }, 
 };

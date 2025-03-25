@@ -1,17 +1,17 @@
 # Increase volume.
-"pactl set-sink-volume @DEFAULT_SINK@ +5%"
+"changevol up"
    XF86AudioRaiseVolume
 
 # Decrease volume.
-"pactl set-sink-volume @DEFAULT_SINK@ -5%"
+"changevol down"
     XF86AudioLowerVolume
 
 # Increase brightness.
-"brightnessctl s +5%"
+"changebright up"
     XF86MonBrightnessUp
 
 # Decrease brightness.
-"brightnessctl s 5%-"
+"changebright down"
     XF86MonBrightnessDown
 
 # Take screenshot selection.
