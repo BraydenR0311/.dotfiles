@@ -54,6 +54,4 @@ xinput disable 9 &
 picom &
 # Start status bar
 slstatus &
-# Place random background.
-/usr/bin/bash ~/Documents/scripts/random-background.sh &
 exec dwm
