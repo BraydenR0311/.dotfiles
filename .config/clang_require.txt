@@ -1,4 +1,0 @@
-      require('lspconfig').clangd.setup {
-        cmd = { '/usr/bin/clangd' }, -- Replace with your custom clangd path
-      }
-
