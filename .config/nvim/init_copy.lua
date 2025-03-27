@@ -1,6 +1,6 @@
 --[[
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
+====================  THIS B( E )FORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -18,6 +18,7 @@
 ========                                                     ========
 =====================================================================
 =====================================================================
+
 What is Kickstart?
 
   Kickstart.nvim is *not* a distribution.
@@ -87,6 +88,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -103,7 +105,6 @@ vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
-
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -185,6 +186,7 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
 vim.keymap.set('i', '<C-i>', '<C-i>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Easier escape' })
 
@@ -202,7 +204,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- TODO: meant to prevent cursor bug when exiting nvim
 vim.cmd [[
     augroup RestoreCursorShapeOnExit
         autocmd!
@@ -210,7 +211,6 @@ vim.cmd [[
     augroup END
 ]]
 
--- Custom rules for indentation based on filetype.
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c' },
   command = 'setlocal shiftwidth=8 expandtab',
@@ -255,6 +255,8 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+
   {
     'catgoose/nvim-colorizer.lua',
     event = 'BufReadPre',
@@ -263,7 +265,6 @@ require('lazy').setup({
     end,
   },
 
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
@@ -272,6 +273,7 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
@@ -296,15 +298,6 @@ require('lazy').setup({
     config = true,
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
-  },
-
-  {
-    'ellisonleao/gruvbox.nvim',
-    priority = 1000,
-    config = true,
-    opts = {
-      transparent_mode = true,
-    },
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -384,6 +377,17 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
+
+  {
+    'folke/tokyonight.nvim',
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+  },
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
@@ -678,7 +682,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -715,6 +719,10 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+      require('lspconfig').clangd.setup {
+        cmd = { '/usr/bin/clangd' }, -- Replace with your custom clangd path
+      }
 
       require('mason-lspconfig').setup {
         handlers = {
@@ -777,7 +785,6 @@ require('lazy').setup({
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
-
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
@@ -822,6 +829,7 @@ require('lazy').setup({
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -948,10 +956,75 @@ require('lazy').setup({
       statusline.section_location = function()
         return '%2l:%-2v'
       end
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    'hkupty/iron.nvim',
+    config = function()
+      local iron = require 'iron.core'
+      local view = require 'iron.view'
+      local common = require 'iron.fts.common'
+
+      iron.setup {
+        config = {
+          ignore_blank_lines = true,
+          -- Whether a repl should be discarded or not
+          scratch_repl = true,
+          close_window_on_exit = true,
+          -- Your repl definitions come here
+          repl_definition = {
+            sh = {
+              -- Can be a table or a function that
+              -- returns a table (see below)
+              command = { 'zsh' },
+            },
+            python = {
+              command = { 'ipython', '-i', '-c', '%matplotlib' }, -- or { "ipython", "--no-autoindent" }
+              format = common.bracketed_paste,
+              block_deviders = { '# %%', '#%%' },
+            },
+          },
+          -- How the repl window will be displayed
+          -- See below for more information
+          repl_open_cmd = view.split.vertical '50%',
+        },
+        -- Iron doesn't set keymaps by default anymore.
+        -- You can set them here or manually add keymaps to the functions in iron.core
+        keymaps = {
+          toggle_repl = '<space>rr', -- toggles the repl open and closed.
+          -- If repl_open_command is a table as above, then the following keymaps are
+          -- available
+          -- toggle_repl_with_cmd_1 = "<space>rv",
+          -- toggle_repl_with_cmd_2 = "<space>rh",
+          restart_repl = '<space>rR', -- calls `IronRestart` to restart the repl
+          send_motion = '<space>sc',
+          visual_send = '<space>sc',
+          send_file = '<space>sf',
+          send_line = '<space>sl',
+          send_paragraph = '<space>sp',
+          send_until_cursor = '<space>su',
+          send_mark = '<space>sm',
+          send_code_block_and_move = '<space>s<cr>',
+          mark_motion = '<space>mc',
+          mark_visual = '<space>mc',
+          remove_mark = '<space>md',
+          interrupt = '<space>s<space>',
+          exit = '<space>sq',
+          clear = '<space>cl',
+        },
+        -- If the highlight is on, you can change how it looks
+        -- For the available options, check nvim_set_hl
+        highlight = {
+          italic = true,
+        },
+        ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+      }
+    end,
+  },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -1025,6 +1098,3 @@ require('lazy').setup({
     },
   },
 })
-
--- Switch colorscheme to gruvbox.
-vim.cmd 'colorscheme gruvbox'
