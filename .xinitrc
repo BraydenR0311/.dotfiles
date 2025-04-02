@@ -47,6 +47,8 @@ if [ -d $xinitdir/xinitrc.d ] ; then
  unset f
 fi
 
+WALLPAPER_DIR='~/Documents/wallpapers'
+
 xbindkeys &
 # Disable touch screen.
 xinput disable 9 &
@@ -54,4 +56,6 @@ xinput disable 9 &
 picom &
 # Start status bar
 slstatus &
+feh --bg-fill --randomize ${WALLPAPER_DIR}/* &
 exec dwm
+

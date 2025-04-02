@@ -115,10 +115,7 @@ alias ipy='ipython -i'
 alias tma='tmux a -t'
 alias tmn='tmux new -s'
 alias wifi='iwctl station wlan0'
-<<<<<<< HEAD
-=======
 alias sd='shutdown'
->>>>>>> 5f25ddefa36b3dfebf6ec33cb73720163c4b8143
 
 autoload -Uz compinit promptinit
 compinit

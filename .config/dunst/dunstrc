@@ -86,7 +86,6 @@
     format = "<span font='JetBrainsMonoNerdFont 15' foreground='#bdae93'>%s</span>"
     alignment = center
     icon_position = off
-    origin = top-center
 
 [brightness]
     appname = "changebright"
