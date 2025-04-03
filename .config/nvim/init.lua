@@ -157,7 +157,7 @@ vim.opt.scrolloff = 10
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -184,6 +184,7 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('i', '<C-i>', '<C-i>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Easier escape' })
 
 -- [[ Basic Autocommands ]]
@@ -199,6 +200,35 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- TODO: meant to prevent cursor bug when exiting nvim
+vim.cmd [[
+    augroup RestoreCursorShapeOnExit
+        autocmd!
+        autocmd VimLeave * set guicursor=a:ver1
+    augroup END
+]]
+
+-- Custom rules for indentation based on filetype.
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c' },
+  command = 'setlocal shiftwidth=8 expandtab',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'cpp' },
+  command = 'setlocal shiftwidth=4 expandtab',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'html' },
+  command = 'setlocal shiftwidth=2 expandtab',
+})
+
+-- add border around autocomplete and doc popups (by pressing Shift+K).
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -818,7 +848,7 @@ require('lazy').setup({
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
-          ['<C-i>'] = cmp.mapping.complete {},
+          ['<C-g>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
