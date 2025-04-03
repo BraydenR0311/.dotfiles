@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sudo='sudo '
-alias vi='/usr/bin/nvim'
+alias vi='/snap/bin/nvim'
 alias venv='source ~/.global_venv/bin/activate'
 alias bcon='bluetoothctl connect 04:9D:05:E4:EB:56'
 alias bdis='bluetoothctl disconnect'
@@ -115,10 +115,12 @@ alias ipy='ipython -i'
 alias tma='tmux a -t'
 alias tmn='tmux new -s'
 alias wifi='iwctl station wlan0'
-<<<<<<< HEAD
-=======
 alias sd='shutdown'
->>>>>>> 5f25ddefa36b3dfebf6ec33cb73720163c4b8143
+alias lamcon='ssh -X brayden@10.2.1.7'
+alias viscon='ssh -X brayden@10.2.1.2'
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 autoload -Uz compinit promptinit
 compinit
