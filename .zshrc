@@ -117,7 +117,8 @@ alias tmn='tmux new -s'
 alias wifi='iwctl station wlan0'
 alias sd='shutdown'
 alias lamcon='ssh -X brayden@10.2.1.7'
-alias viscon='ssh -X brayden@10.2.1.2'
+alias visicon='ssh -X brayden@10.2.1.2'
+alias visiicon='ssh -X brayden@10.2.1.3'
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
