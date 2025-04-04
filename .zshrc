@@ -71,7 +71,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git tmux zsh-autosuggestions zsh-syntax-highlighting you-should-use)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sudo='sudo '
-alias vi='/usr/bin/nvim'
+alias vi='/snap/bin/nvim'
 alias venv='source ~/.global_venv/bin/activate'
 alias bcon='bluetoothctl connect 04:9D:05:E4:EB:56'
 alias bdis='bluetoothctl disconnect'
@@ -116,6 +116,12 @@ alias tma='tmux a -t'
 alias tmn='tmux new -s'
 alias wifi='iwctl station wlan0'
 alias sd='shutdown'
+alias lamcon='ssh -X brayden@10.2.1.7'
+alias visicon='ssh -X brayden@10.2.1.2'
+alias visiicon='ssh -X brayden@10.2.1.3'
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 autoload -Uz compinit promptinit
 compinit

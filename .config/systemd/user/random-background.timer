@@ -1,5 +1,6 @@
 [Unit]
 Description=Create random background periodically.
+After=graphical.target
 
 [Timer]
 OnBootSec=30min
