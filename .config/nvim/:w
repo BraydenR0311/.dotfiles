@@ -225,11 +225,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=2 expandtab",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua" },
-	command = "setlocal shiftwidth=2 expandtab",
-})
-
 -- add border around autocomplete and doc popups (by pressing Shift+K).
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
