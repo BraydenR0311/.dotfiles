@@ -111,8 +111,6 @@ alias open='xdg-open'
 # Fit picture in screen
 alias feh='feh --scale-down'
 alias ipy='ipython -i'
-alias tma='tmux a -t'
-alias tmn='tmux new -s'
 alias wifi='iwctl station wlan0'
 alias sd='shutdown'
 alias lamcon='ssh -X brayden@10.2.1.7'
