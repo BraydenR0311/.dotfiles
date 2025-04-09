@@ -142,7 +142,11 @@ ve () {
 
 # Detect venv and if so, run ipython in interactive mode.
 ipy () {
-    ve && ipython -i
+    if [[ -z $VIRTUAL_ENV ]]
+    then
+        ve 
+    fi
+    ipython -i
 }
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
