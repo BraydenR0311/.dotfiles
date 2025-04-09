@@ -126,7 +126,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 autoload -Uz compinit promptinit
 compinit
 promptinit
-source ~/.global_venv/bin/activate
 
 zstyle ':completion:*' menu select
 
