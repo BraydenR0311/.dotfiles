@@ -120,7 +120,7 @@ alias visiicon='ssh -X brayden@10.2.1.3'
 # Function for detecting and sourcing virtual environments.
 ve () {
     VENV_DIR="venv"
-    GLOBAL_DIR=".global_venv"
+    GLOBAL_DIR=~/.global_venv
 
     # Check if the virtual environment exists
     if ! [[ -d "$VENV_DIR" || -d "$GLOBAL_DIR" ]]
