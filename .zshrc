@@ -105,7 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sudo='sudo '
 alias vi='/snap/bin/nvim'
-alias venv='source ~/.global_venv/bin/activate'
 alias bcon='bluetoothctl connect 04:9D:05:E4:EB:56'
 alias bdis='bluetoothctl disconnect'
 alias open='xdg-open'
@@ -120,8 +119,33 @@ alias lamcon='ssh -X brayden@10.2.1.7'
 alias visicon='ssh -X brayden@10.2.1.2'
 alias visiicon='ssh -X brayden@10.2.1.3'
 
+# Function for autovenv.
+venv () {
+    VENV_DIR="venv"
+    GLOBAL_DIR=".global_venv"
+
+    # Check if the virtual environment exists
+    if ! [[ -d "$VENV_DIR" || -d "$GLOBAL_DIR" ]]
+    then
+        echo "No virtual environment found."
+        return 1
+    fi
+
+    # Activate the virtual environment
+    if [[ -f "$VENV_DIR/bin/activate" ]]
+    then
+        echo "Activating virtual environment..."
+        source "$VENV_DIR/bin/activate"
+    elif [[ -f "$GLOBAL_DIR/bin/activate" ]]
+    then
+        echo "Activating virtual environment..."
+        source "$GLOBAL_DIR/bin/activate"
+    fi
+}
+
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 
 autoload -Uz compinit promptinit
 compinit

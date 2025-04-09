@@ -137,6 +137,10 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Configure default tab spaces.
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -224,11 +228,6 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html" },
   command = "setlocal shiftwidth=2 expandtab",
 })
-
--- add border around autocomplete and doc popups (by pressing Shift+K).
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -1056,6 +1055,3 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal shiftwidth=2 expandtab",
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
