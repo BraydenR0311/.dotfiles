@@ -110,7 +110,6 @@ alias bdis='bluetoothctl disconnect'
 alias open='xdg-open'
 # Fit picture in screen
 alias feh='feh --scale-down'
-alias ipy='ipython -i'
 alias wifi='iwctl station wlan0'
 alias sd='shutdown'
 alias lamcon='ssh -X brayden@10.2.1.7'
@@ -139,6 +138,11 @@ ve () {
         echo "Activating virtual environment..."
         source "$GLOBAL_DIR/bin/activate"
     fi
+}
+
+# Detect venv and if so, run ipython in interactive mode.
+ipy () {
+    ve && ipython -i
 }
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
