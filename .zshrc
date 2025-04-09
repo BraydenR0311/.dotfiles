@@ -119,8 +119,8 @@ alias lamcon='ssh -X brayden@10.2.1.7'
 alias visicon='ssh -X brayden@10.2.1.2'
 alias visiicon='ssh -X brayden@10.2.1.3'
 
-# Function for autovenv.
-venv () {
+# Function for detecting and sourcing virtual environments.
+ve () {
     VENV_DIR="venv"
     GLOBAL_DIR=".global_venv"
 
