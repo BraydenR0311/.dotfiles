@@ -19,7 +19,7 @@ return {
             command = { "zsh" },
           },
           python = {
-            command = { "ipython", "-i", "-c", "%matplotlib" }, -- or { "ipython", "--no-autoindent" }
+            command = { "ipython", "-i" }, -- or { "ipython", "--no-autoindent" }
             format = common.bracketed_paste,
             block_dividers = { "# %%", "#%%" },
           },
