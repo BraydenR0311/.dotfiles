@@ -158,4 +158,5 @@ compinit
 promptinit
 
 zstyle ':completion:*' menu select
+echo '\e[1 q'
 
