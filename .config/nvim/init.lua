@@ -1056,6 +1056,7 @@ require("lazy").setup({
 --Set colorscheme.
 vim.cmd("colorscheme gruvbox")
 
+-- Manual indentetion rules.
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c" },
   command = "setlocal shiftwidth=8 expandtab",
@@ -1071,3 +1072,9 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal shiftwidth=2 expandtab",
 })
 
+-- On exit, restore terminal cursor.
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    vim.fn.system("echo -ne '\\e[0 q'")
+  end
+})
