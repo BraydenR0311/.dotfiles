@@ -158,5 +158,16 @@ compinit
 promptinit
 
 zstyle ':completion:*' menu select
+# Change cursor on startup to blinking block.
 echo '\e[1 q'
 
+
+# Created by `pipx` on 2025-04-16 19:13:34
+export PATH="$PATH:/home/brayden/.local/bin"
+eval "$(register-python-argcomplete3 pipx)"
+
+#Virtualenvwrapper stuff.
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Documents/projects/
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source ~/.local/bin/virtualenvwrapper.sh
