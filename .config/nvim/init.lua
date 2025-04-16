@@ -311,7 +311,7 @@ require("lazy").setup({
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  {               -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     "folke/which-key.nvim",
     event = "VimEnter", -- Sets the loading event to 'VimEnter'
     opts = {
@@ -626,8 +626,11 @@ require("lazy").setup({
                 { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds({ group =
-                "kickstart-lsp-highlight", buffer = event2.buf })
+                vim.api.nvim_clear_autocmds({
+                  group =
+                  "kickstart-lsp-highlight",
+                  buffer = event2.buf
+                })
               end,
             })
           end
@@ -638,8 +641,10 @@ require("lazy").setup({
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map("<leader>th", function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr =
-              event.buf }))
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({
+                bufnr =
+                    event.buf
+              }))
             end, "[T]oggle Inlay [H]ints")
           end
         end,
@@ -772,16 +777,11 @@ require("lazy").setup({
       formatters_by_ft = {
         -- lua = { "stylua" },
         -- Conform can also run multiple formatters sequentially
-        python = { "isort", "black" },
+        -- python = { "ruff_format" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
-      formatters = {
-        black = {
-          prepend_args = { "--line-length", "79" }
-        }
-      }
     },
   },
 
@@ -1098,4 +1098,15 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   callback = function()
     vim.opt.guicursor = "a:block-blinkwait700-blinkoff400-blinkon250-"
   end
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  buffer = buffer,
+  callback = function()
+    vim.lsp.buf.code_action({
+      context = { only = { "source.organizeImports" } },
+      apply = true,
+    })
+    vim.wait(100)
+  end,
 })
