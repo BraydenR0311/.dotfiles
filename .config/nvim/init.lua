@@ -1072,9 +1072,30 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal shiftwidth=2 expandtab",
 })
 
--- On exit, restore terminal cursor.
-vim.api.nvim_create_autocmd("VimLeave", {
+-- -- On exit, restore terminal cursor.
+-- vim.api.nvim_create_autocmd("VimLeave", {
+--   callback = function()
+--     vim.fn.system("echo -ne '\\e[0 q'")
+--   end
+-- })
+
+-- Cursor style for active Neovim
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
   callback = function()
-    vim.fn.system("echo -ne '\\e[0 q'")
+    vim.opt.guicursor = table.concat({
+      "n-v-c:block",
+      "i-ci-ve:ver25",
+      "r-cr:hor20",
+      "o:hor50",
+      "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
+      "sm:block-blinkwait175-blinkoff150-blinkon175"
+    }, ",")
+  end
+})
+
+-- Cursor style for when Neovim exits
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+  callback = function()
+    vim.opt.guicursor = "a:block-blinkwait700-blinkoff400-blinkon250-"
   end
 })
